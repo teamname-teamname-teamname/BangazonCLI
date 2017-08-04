@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.Data.Sqlite;
 using System.Collections;
 
-namespace BagOLoot
+namespace Bangazon
 {
     public class DatabaseInterface
     {
@@ -149,11 +149,11 @@ namespace BagOLoot
                     {
                         dbcmd.CommandText = $@"create table product (
                             `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                            `name`	varchar(80) not null, 
+                            `name` varchar(80) not null, 
                             `customerId` integer not null,
                             `price` decimal(5, 2) not null,
                             `quantity` integer not null,
-                            `description` varchar 150 not null,
+                            `description` varchar(150) not null,
                             FOREIGN KEY(`customerId`) REFERENCES `customer`(`id`)
                         )";
                         try
@@ -282,10 +282,10 @@ namespace BagOLoot
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table paymentType (
-                            `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                            `name`	varchar(80) not null, 
+                            `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+                            `name` varchar(80) not null, 
                             `customerId` integer not null,
-                            `accountNumber` integer not null
+                            `accountNumber` integer not null,
                             FOREIGN KEY(`customerId`) REFERENCES `customer`(`id`)
                         )";
                         try

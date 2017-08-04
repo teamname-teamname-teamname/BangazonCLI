@@ -6,6 +6,14 @@ namespace Bangazon
     {
         static void Main(string[] args)
         {
+            // Create database tables if none exist
+            DatabaseInterface dab = new DatabaseInterface("BANGAZONCLI_DB");
+            dab.CheckCustomerTable();
+            dab.CheckOrderTable();
+            dab.CheckProductTable();
+            dab.CheckProductOrderTable();
+            dab.CheckPaymentTypeTable();
+
             // Seed the database if none exists
             var db = new DatabaseInitializer();
             db.VerifyDataExists();
@@ -42,7 +50,7 @@ namespace Bangazon
                 Console.WriteLine ("Enter customer phone number");
                 Console.Write ("> ");
                 string phoneNumber = Console.ReadLine();
-                CustomerManager manager = new CustomerManager();
+                // CustomerManager manager = new CustomerManager();
             }
         }
     }
