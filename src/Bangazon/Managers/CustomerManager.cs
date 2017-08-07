@@ -17,7 +17,6 @@ namespace Bangazon
         }
         public List<Customer> AddCustomer (Customer newCustomer) 
         {
-            // int id = _db.Insert( $"insert into customer values (null, '{newCustomer.firstName}', 0)");
             _customer.Add(newCustomer);
             
             return _customer;
@@ -25,8 +24,6 @@ namespace Bangazon
 
         public List<Customer> GetCustomerList ()
         {
-            // _db.Query("select id, firstName, lastName, address, city, state, zipcode, phoneNumber from customer",
-            
             return _customer;
         }
 

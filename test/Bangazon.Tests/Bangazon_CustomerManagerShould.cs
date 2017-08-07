@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Bangazon.Tests
 {
-    public class CustomerManagerShould: IDisposable
+    public class CustomerManagerShould
     {
         private readonly CustomerManager _cm;
         private readonly DatabaseInterface _db;
@@ -31,11 +31,6 @@ namespace Bangazon.Tests
             List<Customer> customers = _cm.GetCustomerList();
             Assert.IsType<List<Customer>>(customers);
             Assert.True(customers.Count > 0);
-        }
-
-        public void Dispose()
-        {
-            // _db.Delete("DELETE FROM customer");
         }
     }
 }
