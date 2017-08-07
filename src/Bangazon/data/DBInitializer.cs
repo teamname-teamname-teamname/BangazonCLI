@@ -21,7 +21,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         address = "Ryker's Island",
                         city = "Brooklyn",
                         state = "NY",
-                        zipCode = 12345, 
+                        zipCode = "12345", 
                         phoneNumber = "123-456-7891"
                     },
                     new Customer{
@@ -30,7 +30,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         address = "1 Main Street",
                         city = "Atlanta",
                         state = "GA",
-                        zipCode = 54321, 
+                        zipCode = "54321", 
                         phoneNumber = "123-456-7891"
                     },
                     new Customer{
@@ -39,7 +39,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         address = "2 Main Street",
                         city = "Miami", 
                         state = "FL",
-                        zipCode = 09876,
+                        zipCode = "09876",
                         phoneNumber = "123-456-7713"
                     },
                     new Customer{
@@ -48,7 +48,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         address = "3 Main Street", 
                         city = "Virginia Beach", 
                         state = "VA", 
-                        zipCode = 12356,
+                        zipCode = "12356",
                         phoneNumber = "345-677-0229"
                         
                     }
