@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Bangazon.Models;
 using Xunit;
 
@@ -15,18 +16,21 @@ namespace Bangazon.Tests
             _db.CheckCustomerTable();
         }
         [Fact]
-        public void AddNewCustomer()
+        public void AddCustomerShould()
         {
             Customer newCustomer = new Customer();
 
-            var result = _cm.AddCustomer(newCustomer);
-            Assert.True(result != 0);
+            List<Customer> result = _cm.AddCustomer(newCustomer);
+            Assert.Contains(newCustomer, result);
         }
 
         [Fact]
-        public void ListCustomers()
+        public void GetCustomerListShould()
         {
-
+            _cm.AddCustomer(new Customer());
+            List<Customer> customers = _cm.GetCustomerList();
+            Assert.IsType<List<Customer>>(customers);
+            Assert.True(customers.Count > 0);
         }
 
         public void Dispose()
