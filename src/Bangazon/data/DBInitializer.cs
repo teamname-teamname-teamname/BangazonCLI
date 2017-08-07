@@ -22,7 +22,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         city = "Brooklyn",
                         state = "NY",
                         zipCode = 12345, 
-                        phoneNumber = 123456789111
+                        phoneNumber = "123-456-7891"
                     },
                     new Customer{
                         firstName = "Playboi",
@@ -31,7 +31,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         city = "Atlanta",
                         state = "GA",
                         zipCode = 54321, 
-                        phoneNumber = 123456789111
+                        phoneNumber = "123-456-7891"
                     },
                     new Customer{
                         firstName = "Ski Mask",
@@ -40,7 +40,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         city = "Miami", 
                         state = "FL",
                         zipCode = 09876,
-                        phoneNumber = 123456771321
+                        phoneNumber = "123-456-7713"
                     },
                     new Customer{
                         firstName = "Pusha", 
@@ -49,7 +49,7 @@ namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
                         city = "Virginia Beach", 
                         state = "VA", 
                         zipCode = 12356,
-                        phoneNumber = 3456770229
+                        phoneNumber = "345-677-0229"
                         
                     }
                 };
