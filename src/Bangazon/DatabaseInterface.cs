@@ -9,18 +9,18 @@ namespace Bangazon
 {
     /*
     Class: DatabaseInterface
-    Purpose: The DatabaseInterface class is used to 
+    Purpose: The DatabaseInterface class is used to interact with and manipulate the database.
     Author: Teamname-Teamname-Teamname
     Properties:
-        Query: 
-        Delete: 
-        Insert: 
-        BulkInsert:
-        CheckCustomerTable:
-        CheckProductTable:
-        CheckOrderTable:
-        CheckProductOrderTable:
-        ChekcPaymentTypeTable:
+        Query(string command, Action<SqliteDataReader> handler): 
+        Delete(string command): 
+        Insert(string command): 
+        BulkInsert(string command):
+        CheckCustomerTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckProductTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckProductOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        ChekcPaymentTypeTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
     */
 
     public class DatabaseInterface
