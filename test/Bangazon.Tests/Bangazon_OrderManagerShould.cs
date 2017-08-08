@@ -22,7 +22,6 @@ namespace Bangazon.Tests
         [Fact]
         public void CreateNewOrderShould()
         {
-            
             Customer customer = new Customer();
             int id = _om.CreateOrder(customer);
             Assert.IsType<int>(id);
@@ -35,9 +34,10 @@ namespace Bangazon.Tests
         }
 
         [Fact]
-        public void AddPaymentTypeToOrder()
+        public void AddPaymentTypeToOrderShould()
         {
-
+            var payment = _om.AddPaymentTypeToOrder(1, 18);
+            Assert.True(payment);
         }
 
         public void Dispose()
