@@ -96,6 +96,21 @@ namespace Bangazon
             return insertedItemId;
         }
 
+        public void Update(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open ();
+                SqliteCommand dbcmd = _connection.CreateCommand ();
+                dbcmd.CommandText = command;
+                
+                dbcmd.ExecuteNonQuery ();
+
+                dbcmd.Dispose ();
+                _connection.Close ();
+            }
+        }
+
         // Bulk Insert to seed the databse using data/DBInitializer - Ollie
         public void BulkInsert(string command)
         {

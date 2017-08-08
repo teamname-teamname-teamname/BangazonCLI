@@ -29,5 +29,11 @@ namespace Bangazon
             );
             return id;
         }
+
+        public bool AddPaymentTypeToOrder(int payTypeId, int orderId)
+        {
+            _db.Update($"UPDATE [order] SET PaymentTypeId = {payTypeId} WHERE [order].Id = {orderId}");
+            return true;
+        }
     }
 }
