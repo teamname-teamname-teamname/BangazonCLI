@@ -1,63 +1,25 @@
 using System;
-using System.Linq;
 using Bangazon.Models;
-using System.Threading.Tasks; 
+using Microsoft.Data.Sqlite;
 
 namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
 {
     public static class DBInitializer{
-        public static void Iniitialize(IServiceProvider serviceProvider){
-            using (var context = new BangazonContext(serviceProvider.GetRequiredService<DbContextOptions<BangazonContext>>()))
-            {
-                if(context.Customer.Any())
-                {
-                    return; //database is good
+        public static void Iniitialize(DatabaseInterface db){
+            bool customerExist = false; 
+            db.Query($"select id from customer",
+            (SqliteDatatReader reader) => {
+                while(reader.Read())
+                {   
+                   customerExist = true; 
                 }
-                var customer = new Customer[]
+                if(customerExist = false)
                 {
-                    new Customer{
-                        firstName = "Bobby",
-                        lastName = "Schmurda",
-                        address = "Ryker's Island",
-                        city = "Brooklyn",
-                        state = "NY",
-                        zipCode = 12345, 
-                        phoneNumber = "123-456-7891"
-                    },
-                    new Customer{
-                        firstName = "Playboi",
-                        lastName = "Carti",
-                        address = "1 Main Street",
-                        city = "Atlanta",
-                        state = "GA",
-                        zipCode = 54321, 
-                        phoneNumber = "123-456-7891"
-                    },
-                    new Customer{
-                        firstName = "Ski Mask",
-                        lastName = "the Slump God",
-                        address = "2 Main Street",
-                        city = "Miami", 
-                        state = "FL",
-                        zipCode = 09876,
-                        phoneNumber = "123-456-7713"
-                    },
-                    new Customer{
-                        firstName = "Pusha", 
-                        lastName = "T",
-                        address = "3 Main Street", 
-                        city = "Virginia Beach", 
-                        state = "VA", 
-                        zipCode = 12356,
-                        phoneNumber = "345-677-0229"
-                        
-                    }
-                };
-                foreach(Customer i in customer)
-                {
-                    context.Customer.Add(i);
+                    db.BulkInsert($@"
+                        insert into customer values (null, "Bobby", "Schmurda", "Rykers Island", "Brooklyn", "New York", "12345", "123-456-7890" );
+                    ");
                 }
-                context.SaveChanges();
+            });
             }
 
         }
