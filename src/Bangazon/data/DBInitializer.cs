@@ -17,6 +17,7 @@ namespace Bangazon
                 }
                 if(customersExist == false)
                 {
+
                     dab.BulkInsert($@"
                         insert into customer values(null, 'Bobby', 'Schmurda', 'Rykers Island', 'Brooklyn', 'NY', '12345', '555-555-5555');
                         insert into customer values(null, 'Lil', 'Pump', '2 Main St.', 'Miami', 'FL', '23456', '555-555-5551');
