@@ -7,6 +7,22 @@ using System.Collections;
 
 namespace Bangazon
 {
+    /*
+    Class: DatabaseInterface
+    Purpose: The DatabaseInterface class is used to interact with and manipulate the database.
+    Author: Teamname-Teamname-Teamname
+    Properties:
+        Query(string command, Action<SqliteDataReader> handler): 
+        Delete(string command): 
+        Insert(string command): 
+        BulkInsert(string command):
+        CheckCustomerTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckProductTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckProductOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        ChekcPaymentTypeTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+    */
+
     public class DatabaseInterface
     {
         private string _connectionString;
@@ -78,6 +94,22 @@ namespace Bangazon
             }
 
             return insertedItemId;
+        }
+
+        // Bulk Insert to seed the databse using data/DBInitializer - Ollie
+        public void BulkInsert(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open();
+                SqliteCommand dbcmd = _connection.CreateCommand();
+                dbcmd.CommandText = command;
+
+                dbcmd.ExecuteNonQuery();
+
+                dbcmd.Dispose();
+                _connection.Close();
+            }
         }
 
         public void CheckCustomerTable ()

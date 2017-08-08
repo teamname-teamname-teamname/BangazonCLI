@@ -1,65 +1,46 @@
 using System;
-using System.Linq;
 using Bangazon.Models;
-using System.Threading.Tasks; 
+using Microsoft.Data.Sqlite; 
 
-namespace Bangazon.Data //worked on by Joey & Jackie, August 7th
+namespace Bangazon
 {
-    public static class DBInitializer{
-        public static void Iniitialize(IServiceProvider serviceProvider){
-            using (var context = new BangazonContext(serviceProvider.GetRequiredService<DbContextOptions<BangazonContext>>()))
-            {
-                if(context.Customer.Any())
+    public static class DbInitializer
+    {
+        public static void Initialize(DatabaseInterface dab)
+        {
+            bool customersExist = false; 
+            dab.Query($"select id from customer",
+            (SqliteDataReader reader) => {
+                while(reader.Read())
                 {
-                    return; //database is good
+                    customersExist = true; 
                 }
-                var customer = new Customer[]
+                if(customersExist == false)
                 {
-                    new Customer{
-                        firstName = "Bobby",
-                        lastName = "Schmurda",
-                        address = "Ryker's Island",
-                        city = "Brooklyn",
-                        state = "NY",
-                        zipCode = "12345", 
-                        phoneNumber = "123-456-7891"
-                    },
-                    new Customer{
-                        firstName = "Playboi",
-                        lastName = "Carti",
-                        address = "1 Main Street",
-                        city = "Atlanta",
-                        state = "GA",
-                        zipCode = "54321", 
-                        phoneNumber = "123-456-7891"
-                    },
-                    new Customer{
-                        firstName = "Ski Mask",
-                        lastName = "the Slump God",
-                        address = "2 Main Street",
-                        city = "Miami", 
-                        state = "FL",
-                        zipCode = "09876",
-                        phoneNumber = "123-456-7713"
-                    },
-                    new Customer{
-                        firstName = "Pusha", 
-                        lastName = "T",
-                        address = "3 Main Street", 
-                        city = "Virginia Beach", 
-                        state = "VA", 
-                        zipCode = "12356",
-                        phoneNumber = "345-677-0229"
-                        
-                    }
-                };
-                foreach(Customer i in customer)
-                {
-                    context.Customer.Add(i);
-                }
-                context.SaveChanges();
-            }
 
+                    dab.BulkInsert($@"
+                        insert into customer values(null, 'Bobby', 'Schmurda', 'Rykers Island', 'Brooklyn', 'NY', '12345', '555-555-5555');
+                        insert into customer values(null, 'Lil', 'Pump', '2 Main St.', 'Miami', 'FL', '23456', '555-555-5551');
+                        insert into customer values(null, 'Smoke', 'Purpp', '3 Main St.', 'Miami', 'FL', '34567', '555-555-5552');
+
+                        insert into paymentType values(null, 12, 'Cash', 1);
+                        insert into paymentType values(null, 13, 'Visa', 2);
+                        insert into paymentType values(null, 14, 'MasterCard', 3);
+
+                        insert into [order] values (null, 1, 1);
+                        insert into [order] values(null, 2, 2);
+                        insert into [order] values(null, 3, 3);
+
+                        insert into product values (null, 'Codine Cough Syrup', 3, 12.99, 1, 'Goes great with Sprite!');
+                        insert into product values (null, 'SoundCloud Subscription', 2, 9.99, 2, 'Where all the good hip hop is at');
+                        insert into product values (null, 'Soccer Ball', 1, 10.99, 3, 'Kick goals with it!');
+
+                        insert into productOrder values (null, 1, 2);
+                        insert into productOrder values (null, 2, 1);
+                        insert into productOrder values (null, 3, 3);
+                    ");
+                }
+            });
         }
     }
 }
