@@ -13,6 +13,7 @@ namespace Bangazon
             dab.CheckProductTable();
             dab.CheckProductOrderTable();
             dab.CheckPaymentTypeTable();
+            DbInitializer.Initialize(dab);
 
             // Seed the database if none exists
             // var db = new DatabaseInitializer();
