@@ -5,6 +5,13 @@ using Xunit;
 
 namespace Bangazon.Tests
 {
+
+    /*
+    Class: PaymentTypeManager
+    Purpose: This class is specifically used to test if a payment type can be added to a list,
+             and to test if a list of payments will be returned once a payment has been added.
+    Author: Jackie
+    */
     public class PaymentTypeShould
     {
         private readonly PaymentTypeManager _pt;
@@ -14,7 +21,7 @@ namespace Bangazon.Tests
         {
             _db = new DatabaseInterface("BANGAZONCLI_TEST_DB");
             _pt = new PaymentTypeManager(_db);
-            //_db.CheckPaymentTypeTable();
+            _db.CheckPaymentTypeTable();
         }
 
         [Fact]
@@ -22,9 +29,22 @@ namespace Bangazon.Tests
         {
             PaymentType payment = new PaymentType();
 
-            List<PaymentType> result = _pt.AddPaymentTypeToCustomer(payment);
+            List<PaymentType> result = _pt.AddPaymentToList(payment);
 
             Assert.Contains(payment, result);
         }
+        
+        [Fact]
+        public void GetPaymentTypeListShould()
+        {
+            _pt.AddPaymentToList(new PaymentType());
+            
+            List<PaymentType> payments = _pt.getListOfPayments();
+            
+            Assert.IsType<List<PaymentType>>(payments);
+            
+            Assert.True(payments.Count > 0);
+        }
+
     }
 }
