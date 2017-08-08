@@ -7,6 +7,22 @@ using System.Collections;
 
 namespace Bangazon
 {
+    /*
+    Class: DatabaseInterface
+    Purpose: The DatabaseInterface class is used to 
+    Author: Teamname-Teamname-Teamname
+    Properties:
+        Query: 
+        Delete: 
+        Insert: 
+        BulkInsert:
+        CheckCustomerTable:
+        CheckProductTable:
+        CheckOrderTable:
+        CheckProductOrderTable:
+        ChekcPaymentTypeTable:
+    */
+
     public class DatabaseInterface
     {
         private string _connectionString;
@@ -78,6 +94,22 @@ namespace Bangazon
             }
 
             return insertedItemId;
+        }
+
+        // Bulk Insert to seed the databse using data/DBInitializer - Ollie
+        public void BulkInsert(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open();
+                SqliteCommand dbcmd = _connection.CreateCommand;
+                dbcmd.CommandText = command;
+
+                dbcmd.ExecuteNonQuery();
+
+                dbcmd.Dispose();
+                _connection.Close();
+            }
         }
 
         public void CheckCustomerTable ()
