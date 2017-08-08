@@ -14,5 +14,17 @@ namespace Bangazon
         {
             _db = db;
         }
+
+        private List<Product> _products = new List<Product>();
+
+        public void AddCustomerProduct(Product newProduct)
+        {
+            _products.Add(newProduct);
+        }
+
+        public List<Product> GetProductList()
+        {
+            return _products;
+        }
     }
 }

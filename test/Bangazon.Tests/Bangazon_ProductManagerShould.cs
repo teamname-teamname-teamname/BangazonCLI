@@ -10,20 +10,30 @@ namespace Bangazon.Tests
     {
         private readonly ProductManager _pm;
         private readonly DatabaseInterface _dab;
-        //private readonly DBInitializer _db;
         public ProductManagerShould()
         {
             _dab = new DatabaseInterface("BANGAZONCLI_TEST_DB");
             _pm = new ProductManager(_dab);
-            // _db = new DBInitializer();
 
             _dab.CheckProductTable();
-            DbInitializer.Initialize(_dab);
         }
         [Fact]
-        public void AddProductToSystemShould()
+        public void AddCustomerProductShould()
         {
+            Product newProduct = new Product();
+            _pm.AddCustomerProduct(newProduct);
 
+            List<Product> result = _pm.GetProductList();
+
+            Assert.Contains(newProduct, result);
+        }
+
+        [Fact]
+        public void GetProductListShould()
+        {
+            List<Product> products = _pm.GetProductList();
+
+            Assert.IsType<List<Product>>(products);
         }
     }
 }
