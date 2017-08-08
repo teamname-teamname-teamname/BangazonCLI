@@ -4,13 +4,15 @@ using System.Linq;
 using Bangazon.Models;
 using Microsoft.Data.Sqlite;
 
-namespace Bangazon
+namespace Bangazon //worked on by Dilshod 8/8
 {
     public class CustomerManager
     {
         private List<Customer> _customer = new List<Customer>();
         private DatabaseInterface _db;
 
+        public static int activeCustomer = 1;
+    
         public CustomerManager(DatabaseInterface db)
         {
             _db = db;
@@ -27,7 +29,11 @@ namespace Bangazon
             return _customer;
         }
 
-        public Customer GetACustomer (int id) =>  _customer.SingleOrDefault(cust => cust.id == id);
+        public int ReturnActiveCustomer ()
+        {
+            return activeCustomer; 
+        }
+
 
     }
 }
