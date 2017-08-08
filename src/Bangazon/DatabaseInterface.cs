@@ -102,7 +102,7 @@ namespace Bangazon
             using (_connection)
             {
                 _connection.Open();
-                SqliteCommand dbcmd = _connection.CreateCommand;
+                SqliteCommand dbcmd = _connection.CreateCommand();
                 dbcmd.CommandText = command;
 
                 dbcmd.ExecuteNonQuery();
