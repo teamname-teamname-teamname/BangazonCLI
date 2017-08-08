@@ -42,7 +42,6 @@ namespace Bangazon.Tests
 
         public void Dispose()
         {
-            
             _db.Delete("DELETE FROM [order]");
         }
     }
