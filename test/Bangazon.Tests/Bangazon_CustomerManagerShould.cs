@@ -15,6 +15,7 @@ namespace Bangazon.Tests
             _cm = new CustomerManager(_db);
             _db.CheckCustomerTable();
         }
+
         [Fact]
         public void AddCustomerShould()
         {
@@ -32,5 +33,13 @@ namespace Bangazon.Tests
             Assert.IsType<List<Customer>>(customers);
             Assert.True(customers.Count > 0);
         }
+
+        [Fact]
+        public void AllActiveCustomers()
+        {
+            int gucci = _cm.ReturnActiveCustomer();           
+            Assert.True(gucci > 0);       
+        }
+
     }
 }
