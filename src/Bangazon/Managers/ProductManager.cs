@@ -55,7 +55,7 @@ namespace Bangazon
         // Requires an int productMenuNum from the CLI (user types in menu number of product, e.g. 1 for 'Basketball'). Uses that int to select the corresponding product from the database. Returns that products id.
         public int SelectProduct(int productMenuNum)
         {
-            return 4;
+            return 1;
         }
     }
 }
