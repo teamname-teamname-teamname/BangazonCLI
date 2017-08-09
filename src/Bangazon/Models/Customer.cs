@@ -1,3 +1,11 @@
+// Class: Customer
+// Purpose: The Customer class is used to store all customer information.
+// Author: Dilshod
+// Properties:
+// Id: A unique idetification number for each customer
+// CustomerName:
+// CustomerInfo: 
+
 namespace Bangazon.Models
 {
     public class Customer
