@@ -37,8 +37,16 @@ namespace Bangazon.Tests
         [Fact]
         public void AllActiveCustomers()
         {
-            int gucci = _cm.ReturnActiveCustomer();           
+            int gucci = CustomerManager.ReturnActiveCustomer();           
             Assert.True(gucci > 0);       
+        }
+
+        [Fact] 
+        public void UserSelectsAnActiveCustomer()
+        {
+            var raf = CustomerManager.SelectActiveCustomer(1);
+            Assert.IsType<int>(raf);
+            Assert.True(raf > 0);
         }
 
     }
