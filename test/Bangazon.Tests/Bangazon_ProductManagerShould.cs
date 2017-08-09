@@ -39,7 +39,9 @@ namespace Bangazon.Tests
         [Fact]
         public void SelectProductShould()
         {
-            Assert.IsType<int>(_pm.SelectProduct());
+            int productId = _pm.SelectProduct(0);
+            Assert.IsType<int>(productId);
+            Assert.True(productId > 0);
         }
     }
 }
