@@ -9,7 +9,8 @@ namespace Bangazon.Tests
     /*
     Class: PaymentTypeManager
     Purpose: This class is specifically used to test if a payment type can be added to a list,
-             and to test if a list of payments will be returned once a payment has been added.
+             and to test if a list of payments will be returned once a payment has been added. 
+             Added a new test for selecting a payment type in the command line.
     Author: Jackie
     */
     public class PaymentTypeShould
@@ -44,6 +45,14 @@ namespace Bangazon.Tests
             Assert.IsType<List<PaymentType>>(payments);
             
             Assert.True(payments.Count > 0);
+        }
+
+        [Fact]
+        public void SelectingAPaymentTypeShould()
+        {
+            int paymentTypeId = _pt.SelectPaymentType(0);
+            Assert.IsType<int>(paymentTypeId);
+            Assert.True(paymentTypeId > 0);
         }
 
     }
