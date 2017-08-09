@@ -36,5 +36,12 @@ namespace Bangazon
         {
             return _payment;
         }
+
+        //This method is for selecting a payment type in the command line. Need to pass
+        //in an integer so user will be able to select the payment by the specific number.
+        public int SelectPaymentType(int paymentTypeNumber)
+        {
+            return 2;
+        }
     }
 }
