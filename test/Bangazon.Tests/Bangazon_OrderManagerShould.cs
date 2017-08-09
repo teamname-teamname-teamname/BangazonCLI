@@ -40,6 +40,13 @@ namespace Bangazon.Tests
             Assert.True(payment);
         }
 
+        [Fact]
+        public void AddProductToOrderShould()
+        {
+            int prodOrdId = _om.AddProductToOrder(12, 23);
+            Assert.True(prodOrdId > 0);
+        }
+
         public void Dispose()
         {
             
