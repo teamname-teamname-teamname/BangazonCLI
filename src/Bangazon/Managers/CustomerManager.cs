@@ -42,7 +42,7 @@ namespace Bangazon
             return _customer;
         }
 
-        public int ReturnActiveCustomer ()
+        public static int ReturnActiveCustomer ()
         {
             return activeCustomer; 
         }
