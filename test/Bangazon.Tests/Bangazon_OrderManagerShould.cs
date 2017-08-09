@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using Bangazon.Models;
+using System.Collections.Generic;
 
 namespace Bangazon.Tests
 {
@@ -30,26 +31,30 @@ namespace Bangazon.Tests
         [Fact]
         public void ListOrders()
         {
-
+            List<Order> orders = _om.GetOrders(); // Retrieve all orders as a List.
+            foreach(Order o in orders) // Iterate through the list of orders.
+            {
+                Assert.IsType<Order>(o); // Assert that what is returned is a list of orders.
+            }
+            Assert.True(orders.Count > 0); // Checks if the order list has an order.
         }
 
         [Fact]
         public void AddPaymentTypeToOrderShould()
         {
-            var payment = _om.AddPaymentTypeToOrder(1, 18);
+            bool payment = _om.AddPaymentTypeToOrder(1, 32); // First argument is Payment Type Id, second argument is Order Id
             Assert.True(payment);
         }
 
         [Fact]
         public void AddProductToOrderShould()
         {
-            int prodOrdId = _om.AddProductToOrder(12, 23);
-            Assert.True(prodOrdId > 0);
+            int prodOrdId = _om.AddProductToOrder(12, 32); // First argument is Product Id, second argument is Order Id
+            Assert.IsType<int>(prodOrdId);
         }
 
         public void Dispose()
         {
-            
             _db.Delete("DELETE FROM [order]");
         }
     }
