@@ -17,12 +17,12 @@ namespace Bangazon
     public class CustomerManager
     {
         private List<Customer> _customer = new List<Customer>();
-        private DatabaseInterface _db;
-        private int _activeCustomer;
+        private DatabaseInterface _db; 
+        public static int activeCustomer;
 
-        public static int SelectActiveCustomer()
+        public static int SelectActiveCustomer(int selectedCustomer)
         {
-                int activeCustomer = 1;
+                 activeCustomer = 1;
                 return  activeCustomer;
         }
     
@@ -44,7 +44,7 @@ namespace Bangazon
 
         public int ReturnActiveCustomer ()
         {
-            return _activeCustomer; 
+            return activeCustomer; 
         }
 
 
