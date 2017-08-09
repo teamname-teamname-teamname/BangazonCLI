@@ -4,14 +4,27 @@ using System.Linq;
 using Bangazon.Models;
 using Microsoft.Data.Sqlite;
 
-namespace Bangazon //worked on by Dilshod 8/8
+namespace Bangazon 
+            
+        /*
+    Class: Customer Manager
+    Purpose: This class is used to write implementation code for 
+             tests in the Bangazon_CustomerManagerShould.cs file.
+    Author: Dilshod 8/8, Joey 8/9
+    */
+
 {
     public class CustomerManager
     {
         private List<Customer> _customer = new List<Customer>();
         private DatabaseInterface _db;
+        private int _activeCustomer;
 
-        public static int activeCustomer = 1;
+        public static int SelectActiveCustomer()
+        {
+                int activeCustomer = 1;
+                return  activeCustomer;
+        }
     
         public CustomerManager(DatabaseInterface db)
         {
@@ -31,7 +44,7 @@ namespace Bangazon //worked on by Dilshod 8/8
 
         public int ReturnActiveCustomer ()
         {
-            return activeCustomer; 
+            return _activeCustomer; 
         }
 
 
