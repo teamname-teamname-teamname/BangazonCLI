@@ -35,5 +35,10 @@ namespace Bangazon
             _db.Update($"UPDATE [order] SET PaymentTypeId = {payTypeId} WHERE [order].Id = {orderId}");
             return true;
         }
+
+        public int AddProductToOrder(int prodId, int orderid)
+        {
+            return 19;
+        }
     }
 }
