@@ -20,16 +20,20 @@ namespace Bangazon.Actions
         {
             // Get list of Products
             var products = pm.GetProductList();
-            var counter = 1;
-            Console.Clear();
-            Console.WriteLine ("Choose a product to add to your cart");
-            foreach (var product in products)
-                {
-                    Console.WriteLine($"{counter++}. {product.Name}");
-                }
-            Console.WriteLine($"Press {counter} to quit");
-            Console.Write ("> ");
-            int chooseCustomer = int.Parse(Console.ReadLine());
+            int chooseCustomer;
+            int counter;
+            do {
+                counter = 1;
+                Console.Clear();
+                Console.WriteLine ("Choose a product to add to your cart");
+                foreach (var product in products)
+                    {
+                        Console.WriteLine($"{counter++}. {product.Name}");
+                    }
+                Console.WriteLine($"Press {counter} to quit");
+                Console.Write ("> ");
+                chooseCustomer = int.Parse(Console.ReadLine());
+            } while (chooseCustomer < counter);
         }
     }
 }
