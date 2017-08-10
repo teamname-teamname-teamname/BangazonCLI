@@ -126,7 +126,7 @@ namespace Bangazon
                 _connection.Close();
             }
         }
-
+      
         public void CheckCustomerTable ()
         {
             using (_connection)
@@ -196,7 +196,7 @@ namespace Bangazon
                     {
                         dbcmd.CommandText = $@"create table product (
                             `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                            `name` varchar(80) not null, 
+                            `name` varchar(80) not null,
                             `customerId` integer not null,
                             `price` decimal(5, 2) not null,
                             `quantity` integer not null,
