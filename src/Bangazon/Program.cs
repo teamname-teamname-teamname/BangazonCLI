@@ -58,7 +58,7 @@ namespace Bangazon
                         break;
                     // Menu option 4: Add product to sell
                     case 4:
-                        
+                        CreateProduct.DoAction(pm);
                         break;
                     // Menu option 5: Add product to shopping cart
                     case 5:
@@ -88,12 +88,8 @@ namespace Bangazon
                     case 11:
                         
                         break;
-                    // Menu option 12: Leave Bangazon!
-                    case 12:
-                        
-                        break;
                 }
-            } while (choice != 13);
+            } while (choice != 12);
         }
     }
 }

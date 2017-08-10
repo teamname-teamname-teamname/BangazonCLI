@@ -4,7 +4,7 @@ using System.Linq;
 using Bangazon.Models;
 using Microsoft.Data.Sqlite;
 
-namespace Bangazon
+namespace Bangazon.Managers
 {
 
     /*
@@ -16,6 +16,7 @@ namespace Bangazon
     public class PaymentTypeManager
     {
         private List<PaymentType> _payment = new List<PaymentType>();
+        
         private DatabaseInterface _db;
 
         public PaymentTypeManager(DatabaseInterface db)
@@ -23,14 +24,15 @@ namespace Bangazon
             _db = db;
         }
 
-        //This method will add a payment to a list of Payment Types then return the list with added Payment Type.
-           public List<PaymentType> AddPaymentToList (PaymentType payment) 
+        //This method will add a payment to the database and add a payment type to a list, then return the paymentTypeId.
+           public int AddPayment (PaymentType payment) 
         {
+            int id = _db.Insert($"INSERT INTO paymentType values(null, '{payment.Name}', '{payment.CustomerId}', '{payment.AccountNumber}')");
+            payment.id = id;
             _payment.Add(payment);
-            
-            return _payment;
+            return id;
         }
-        
+
         //This method will return the list of payments types.
         public List<PaymentType> getListOfPayments()
         {
