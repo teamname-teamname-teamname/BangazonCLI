@@ -4,7 +4,7 @@ using System.Linq;
 using Bangazon.Models;
 using Microsoft.Data.Sqlite;
 
-namespace Bangazon
+namespace Bangazon.Managers
 {
     public class OrderManager
     {
