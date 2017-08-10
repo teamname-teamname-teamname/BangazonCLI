@@ -54,6 +54,22 @@ namespace Bangazon.Managers
         */
         public List<Product> GetProductList()
         {
+            _db.Query("SELECT Id, CustomerId, Name, Description, Quantity, Price FROM product",
+            (SqliteDataReader reader) =>{
+                while(reader.Read())
+                {
+                    _products.Add(new Product()
+                        {
+                            Id = reader.GetInt32(0),
+                            CustomerId = reader.GetInt32(1),
+                            Name = reader[2].ToString(),
+                            Description = reader[3].ToString(),
+                            Quantity = reader.GetInt32(4),
+                            Price = reader.GetDouble(5)
+                        }
+                    );
+                }
+            });
             return _products;
         }
 
