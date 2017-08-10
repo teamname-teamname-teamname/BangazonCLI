@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-// using Bangazon.Managers;
+using Bangazon.Managers;
 using Bangazon.Models;
 
 
@@ -39,6 +39,17 @@ namespace Bangazon.Actions
         Console.Write ("> ");
         string phoneNumber = Console.ReadLine();
         Console.Write ("> ");
+        Customer newCustomer = new Customer()
+            {
+                firstName = firstName,
+                lastName = lastName,
+                address = streetAddress,
+                city = city,
+                state = state,
+                zipCode = zipCode,
+                phoneNumber = phoneNumber
+            };
+            registr.AddCustomer(newCustomer);
     }
   }
 }
