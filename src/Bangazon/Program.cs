@@ -1,4 +1,6 @@
 ﻿using System;
+using Bangazon.Managers;
+using Bangazon.Actions;
 
 namespace Bangazon
 {
@@ -21,6 +23,10 @@ namespace Bangazon
 
             // Present the main menu from MainMenu.cs file
             MainMenu menu = new MainMenu();
+            CustomerManager cm = new CustomerManager(dab);
+            OrderManager om = new OrderManager(dab);
+            PaymentTypeManager ptm = new PaymentTypeManager(dab);
+            ProductManager pm = new ProductManager(dab);
 
 			// Read in the user's choice
 			int choice;
@@ -36,7 +42,7 @@ namespace Bangazon
                 {
                     // Menu option 1: Adding Customer
                     case 1:
-                        
+                        CreateCustomer.DoAction(cm);
                         break;
 
                     // Menu option 2: Choosing Active Customer
@@ -53,7 +59,7 @@ namespace Bangazon
                         break;
                     // Menu option 5: Add product to shopping cart
                     case 5:
-                        
+                        AddProductCart.DoAction(om, pm);
                         break;
                     // Menu option 6: Complete an order
                     case 6:

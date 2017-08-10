@@ -24,9 +24,9 @@ namespace Bangazon
             Console.WriteLine ("11. Show overall product popularity");
             Console.WriteLine ("12. Leave Bangazon!");
             Console.Write ("> ");
-            ConsoleKeyInfo enteredKey = Console.ReadKey();
-            Console.WriteLine("");
-            return int.Parse(enteredKey.KeyChar.ToString());
+            int enteredKey;
+			Int32.TryParse (Console.ReadLine(), out enteredKey);
+            return enteredKey;
         }
     }
 }
