@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Bangazon.Tests
 {
-    public class OrderManagerShould: IDisposable
+    public class OrderManagerShould//: IDisposable
     {
 
         private readonly OrderManager _om;
@@ -18,6 +18,8 @@ namespace Bangazon.Tests
             _db.CheckOrderTable();
             _db.CheckCustomerTable();
             _db.CheckPaymentTypeTable();
+            _db.CheckProductOrderTable();
+            _db.CheckProductTable();
         }
 
         [Fact]
@@ -53,9 +55,9 @@ namespace Bangazon.Tests
             Assert.IsType<int>(prodOrdId);
         }
 
-        public void Dispose()
-        {
-            _db.Delete("DELETE FROM [order]");
-        }
+        // public void Dispose()
+        // {
+        //     _db.Delete("DELETE FROM [order]");
+        // }
     }
 }
