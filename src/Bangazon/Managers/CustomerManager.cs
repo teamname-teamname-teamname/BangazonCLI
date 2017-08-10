@@ -34,6 +34,19 @@ namespace Bangazon.Managers
         public int AddCustomer (Customer newCustomer) 
         {
            int id = _db.Insert($"insert into customer values(null, '{newCustomer.firstName}', '{newCustomer.lastName}', '{newCustomer.address}', '{newCustomer.city}', '{newCustomer.state}', '{newCustomer.zipCode}', '{newCustomer.phoneNumber}')");
+           _customer.Add(
+                new Customer()
+                {
+                    id = id,
+                    firstName = newCustomer.firstName,
+                    lastName = newCustomer.lastName,
+                    address = newCustomer.address,
+                    city = newCustomer.city,
+                    state = newCustomer.state,
+                    zipCode =  newCustomer.zipCode,
+                    phoneNumber = newCustomer.phoneNumber
+                }
+            );
            return id;
         }
 

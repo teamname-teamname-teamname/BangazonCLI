@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Bangazon.Managers;
 using Bangazon.Models;
 using Bangazon.Managers;
 using Xunit;
