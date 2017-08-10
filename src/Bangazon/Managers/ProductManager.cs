@@ -31,7 +31,7 @@ namespace Bangazon
         {
             id: null,
             name: "string",
-            customerId: CustomerManager.ActiveCustomer,
+            customerId: CustomerManager.activeCustomer,
             price: 12.99,
             quantity: 300,
             description: "description of item"
@@ -39,6 +39,10 @@ namespace Bangazon
         */
         public void AddCustomerProduct(Product newProduct)
         {
+            int id = _db.Insert($"INSERT INTO product VALUES (null,'{newProduct.Name}', {newProduct.CustomerId}, {newProduct.Price}, {newProduct.Quantity}, '{newProduct.Description}')");
+
+            newProduct.Id = id;
+
             _products.Add(newProduct);
         }
 
