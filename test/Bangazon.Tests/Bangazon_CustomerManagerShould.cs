@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bangazon.Tests
 {
-    public class CustomerManagerShould
+    public class CustomerManagerShould : IDisposable
     {
         private readonly CustomerManager _cm;
         private readonly DatabaseInterface _db;
@@ -22,8 +22,8 @@ namespace Bangazon.Tests
         {
             Customer newCustomer = new Customer();
 
-            List<Customer> result = _cm.AddCustomer(newCustomer);
-            Assert.Contains(newCustomer, result);
+            int result = _cm.AddCustomer(newCustomer);
+            Assert.IsType<int>(result);
         }
 
         [Fact]
@@ -35,19 +35,24 @@ namespace Bangazon.Tests
             Assert.True(customers.Count > 0);
         }
 
-        [Fact]
-        public void AllActiveCustomers()
-        {
-            int gucci = CustomerManager.ReturnActiveCustomer();           
-            Assert.True(gucci > 0);       
-        }
-
         [Fact] 
         public void UserSelectsAnActiveCustomer()
         {
             var raf = CustomerManager.SelectActiveCustomer(1);
             Assert.IsType<int>(raf);
             Assert.True(raf > 0);
+        }
+
+        [Fact]
+        public void UserSelectsSingleCustomer()
+        {
+            int cartier = _cm.AddCustomer(new Customer());
+            Assert.IsType<int>(cartier);
+        }
+
+        public void Dispose()
+        {
+            _db.Delete("DELETE FROM customer");
         }
 
     }

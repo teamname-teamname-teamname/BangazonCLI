@@ -4,7 +4,7 @@ using System.Linq;
 using Bangazon.Models;
 using Microsoft.Data.Sqlite;
 
-namespace Bangazon
+namespace Bangazon.Managers
 {
     /*
     Class: ProductManager
@@ -31,15 +31,20 @@ namespace Bangazon
         {
             id: null,
             name: "string",
-            customerId: CustomerManager.ActiveCustomer,
+            customerId: CustomerManager.activeCustomer,
             price: 12.99,
             quantity: 300,
             description: "description of item"
         }
         */
-        public void AddCustomerProduct(Product newProduct)
+        public int AddCustomerProduct(Product newProduct)
         {
+            int id = _db.Insert($"INSERT INTO product VALUES (null,'{newProduct.Name}', {newProduct.CustomerId}, {newProduct.Price}, {newProduct.Quantity}, '{newProduct.Description}')");
+
+            newProduct.Id = id;
+
             _products.Add(newProduct);
+            return id;
         }
 
         /* Returns a list of all products. Displays them in the CLI in a numbered fashion
