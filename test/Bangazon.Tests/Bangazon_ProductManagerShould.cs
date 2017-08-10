@@ -24,22 +24,6 @@ namespace Bangazon.Tests
         [Fact]
         public void AddCustomerProductShould()
         {
-            // Create a customer
-            // int id = _dab.Insert($"INSERT into customer values (null, 'jack', 'turnbladt', '434 paper street', 'Assville', 'MN', '90210', '424-546-9822')");
-
-            // _cm.AddCustomer(new Customer()
-            //     {
-            //         id = 1,
-            //         firstName = "jack",
-            //         lastName = "turnbladt",
-            //         address = "434 paper street",
-            //         city = "Assville",
-            //         state = "MN",
-            //         zipCode = "90210",
-            //         phoneNumber = "424-546-9822"
-            //     }
-            // );
-
             Product newProduct = new Product()
                 {
                     
