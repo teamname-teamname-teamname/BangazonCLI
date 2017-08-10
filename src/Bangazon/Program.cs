@@ -47,7 +47,7 @@ namespace Bangazon
 
                     // Menu option 2: Choosing Active Customer
                     case 2:
-                        
+                        ChooseCustomer.DoAction(cm);
                         break;
                     // Menu option 3: Create Payment Options
                     case 3:
