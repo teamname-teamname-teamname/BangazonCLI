@@ -12,15 +12,16 @@ namespace Bangazon
     Purpose: The DatabaseInterface class is used to interact with and manipulate the database.
     Author: Teamname-Teamname-Teamname
     Properties:
-        Query(string command, Action<SqliteDataReader> handler): 
-        Delete(string command): 
-        Insert(string command): 
-        BulkInsert(string command):
+        Query(string command, Action<SqliteDataReader> handler): Method to query the DB
+        Delete(string command): Method to delete the selected row from the DB
+        Insert(string command): Method to add a new row to a table in the DB
+        BulkInsert(string command): Method to add a whole bunch of stuff to the DB
+        Update(string command): Method to update an existing row in the DB
         CheckCustomerTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
-        CheckProductTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
-        CheckOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
-        CheckProductOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
-        ChekcPaymentTypeTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckProductTable: Checks the database for a 'Product' table. If there isn't one, it creates one.
+        CheckOrderTable: Checks the database for a 'Order' table. If there isn't one, it creates one.
+        CheckProductOrderTable: Checks the database for a 'ProductOrder' table. If there isn't one, it creates one.
+        ChekcPaymentTypeTable: Checks the database for a 'PaymentType' table. If there isn't one, it creates one.
     */
 
     public class DatabaseInterface
@@ -53,6 +54,7 @@ namespace Bangazon
             }
         }
 
+        // Accepts a SQL command to delete something from the DB
         public void Delete(string command)
         {
             using (_connection)
@@ -68,6 +70,7 @@ namespace Bangazon
             }
         }
 
+        // Accepts a SQL command to insert something into the DB
         public int Insert(string command)
         {
             int insertedItemId = 0;
@@ -96,6 +99,7 @@ namespace Bangazon
             return insertedItemId;
         }
 
+        // Accepts a SQL command to update something in the DB
         public void Update(string command)
         {
             using (_connection)
