@@ -17,7 +17,7 @@ namespace Bangazon.Actions
         {
             Console.Clear();
             // Checks if there's an active customer. If not, kicks them to the main menu
-            if(CustomerManager.activeCustomer != 0)
+            if(CustomerManager.activeCustomer == 0)
             {
                 Console.WriteLine("* Please choose an active customer before continuing *");
                 Console.WriteLine("* Press 'ENTER' to return to the main menu *");
@@ -53,7 +53,7 @@ namespace Bangazon.Actions
                         CustomerId = CustomerManager.activeCustomer
                     }
                 );
-                
+
                 Console.WriteLine($"Product Id: {prodId} successfully added!");
                 Console.WriteLine("* Press 'ENTER' to return to the main menu *");
                 Console.ReadLine();
