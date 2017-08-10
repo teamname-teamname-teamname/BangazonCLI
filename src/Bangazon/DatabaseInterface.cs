@@ -7,6 +7,22 @@ using System.Collections;
 
 namespace Bangazon
 {
+    /*
+    Class: DatabaseInterface
+    Purpose: The DatabaseInterface class is used to interact with and manipulate the database.
+    Author: Teamname-Teamname-Teamname
+    Properties:
+        Query(string command, Action<SqliteDataReader> handler): 
+        Delete(string command): 
+        Insert(string command): 
+        BulkInsert(string command):
+        CheckCustomerTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckProductTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        CheckProductOrderTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+        ChekcPaymentTypeTable: Checks the database for a 'Customer' table. If there isn't one, it creates one.
+    */
+
     public class DatabaseInterface
     {
         private string _connectionString;
@@ -80,6 +96,37 @@ namespace Bangazon
             return insertedItemId;
         }
 
+        public void Update(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open ();
+                SqliteCommand dbcmd = _connection.CreateCommand ();
+                dbcmd.CommandText = command;
+                
+                dbcmd.ExecuteNonQuery ();
+
+                dbcmd.Dispose ();
+                _connection.Close ();
+            }
+        }
+
+        // Bulk Insert to seed the databse using data/DBInitializer - Ollie
+        public void BulkInsert(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open();
+                SqliteCommand dbcmd = _connection.CreateCommand();
+                dbcmd.CommandText = command;
+
+                dbcmd.ExecuteNonQuery();
+
+                dbcmd.Dispose();
+                _connection.Close();
+            }
+        }
+      
         public void CheckCustomerTable ()
         {
             using (_connection)
@@ -103,13 +150,13 @@ namespace Bangazon
                     {
                         dbcmd.CommandText = $@"create table customer (
                             `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                            `firstName`	varchar(80) not null,
-                            `LastName` varchar(80) not null,
-                            `address` varchar(30) not null,
-                            `city` varchar(30) not null,
-                            `state`	varchar(2) not null,
-                            `zipcode` varchar(10) not null,
-                            `phoneNumber`varchar(10) not null
+                            `firstName`	varchar(80) not null, 
+                            `lastName` varchar(80) not null,
+                            `address` varchar(80) not null,
+                            `city` varchar(20) not null,
+                            `state` varchar(2) not null,
+                            `zipCode`  varchar(5) not null,
+                            `phoneNumber` varchar(12) not null
                         )";
                         try
                         {
@@ -149,7 +196,7 @@ namespace Bangazon
                     {
                         dbcmd.CommandText = $@"create table product (
                             `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                            `name`	varchar(80) not null, 
+                            `name` varchar(80) not null,
                             `customerId` integer not null,
                             `price` decimal(5, 2) not null,
                             `quantity` integer not null,
@@ -194,10 +241,11 @@ namespace Bangazon
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table [order] (
-                            `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+                            `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
                             `customerId` integer not null,
-                            FOREIGN KEY(`paymentTypeId`) REFERENCES `paymentType`(`id`),
-                            FOREIGN KEY(`customerId`) REFERENCES `customer`(`id`)
+                            `paymentTypeId` integer,
+                            FOREIGN KEY(`customerId`) REFERENCES `customer`(`id`),
+                            FOREIGN KEY(`paymentTypeId`) REFERENCES `paymentType`(`id`)
                         )";
                         try
                         {
@@ -222,7 +270,7 @@ namespace Bangazon
                 _connection.Open();
                 SqliteCommand dbcmd = _connection.CreateCommand ();
 
-                // Query the order table to see if table is created
+                // Query the productOrder table to see if table is created
                 dbcmd.CommandText = $"select id from productOrder";
 
                 try
@@ -281,7 +329,7 @@ namespace Bangazon
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table paymentType (
-                            `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+                            `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `name` varchar(80) not null, 
                             `customerId` integer not null,
                             `accountNumber` integer not null,

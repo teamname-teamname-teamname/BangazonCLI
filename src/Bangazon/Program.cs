@@ -6,13 +6,18 @@ namespace Bangazon
     {
         static void Main(string[] args)
         {
+            // Create database tables if none exist
+            DatabaseInterface dab = new DatabaseInterface("BANGAZONCLI_DB");
+            dab.CheckCustomerTable();
+            dab.CheckOrderTable();
+            dab.CheckProductTable();
+            dab.CheckProductOrderTable();
+            dab.CheckPaymentTypeTable();
+            DbInitializer.Initialize(dab);
+
             // Seed the database if none exists
-            DatabaseInterface db = new DatabaseInterface("BANGAZONCLI_DB");
-            db.CheckCustomerTable();
-            db.CheckOrderTable();
-            db.CheckProductTable();
-            db.CheckProductOrderTable();
-            db.CheckPaymentTypeTable();
+            // var db = new DatabaseInitializer();
+            // db.VerifyDataExists();
 
             // Present the main menu from MainMenu.cs file
             MainMenu menu = new MainMenu();
