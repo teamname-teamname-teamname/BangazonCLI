@@ -52,6 +52,7 @@ namespace Bangazon
                     // Menu option 3: Create Payment Options
                     case 3:
                         
+                       AddPayment.AddPay(ptm);
                         break;
                     // Menu option 4: Add product to sell
                     case 4:
