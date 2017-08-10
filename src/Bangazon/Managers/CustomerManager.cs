@@ -4,13 +4,13 @@ using System.Linq;
 using Bangazon.Models;
 using Microsoft.Data.Sqlite;
 
-namespace Bangazon 
+namespace Bangazon.Managers
             
         /*
     Class: Customer Manager
     Purpose: This class is used to write implementation code for 
              tests in the Bangazon_CustomerManagerShould.cs file.
-    Author: Dilshod 8/8, Joey 8/9
+    Author: Dilshod 8/8, Joey 8/9, 8/10
     */
 
 {
@@ -30,23 +30,40 @@ namespace Bangazon
         {
             _db = db;
         }
-        public List<Customer> AddCustomer (Customer newCustomer) 
+        // Method will add customer to database
+        public int AddCustomer (Customer newCustomer) 
         {
-            _customer.Add(newCustomer);
-            
+           int id = _db.Insert($"insert into customer values(null, '{newCustomer.firstName}', '{newCustomer.lastName}', '{newCustomer.address}', '{newCustomer.city}', '{newCustomer.state}', '{newCustomer.zipCode}', '{newCustomer.phoneNumber}')");
+           return id;
+        }
+
+        // Method will return list of all customers in database
+        public List<Customer> GetCustomerList()
+        {
+            _db.Query("select id, firstName, lastName, address, city, state, zipCode, phoneNumber from customer",
+            (SqliteDataReader reader) =>{
+                while(reader.Read())
+                {
+                    _customer.Add(new Customer(){
+                        id = reader.GetInt32(0),
+                        firstName = reader[1].ToString(),
+                        lastName = reader[2].ToString(),
+                        address = reader[3].ToString(),
+                        city = reader[4].ToString(),
+                        state = reader[5].ToString(),
+                        zipCode = reader[6].ToString(),
+                        phoneNumber = reader[7].ToString()  
+
+                    });
+                }
+            });
+
             return _customer;
         }
 
-        public List<Customer> GetCustomerList ()
-        {
-            return _customer;
-        }
-
-        public static int ReturnActiveCustomer ()
-        {
-            return activeCustomer; 
-        }
-
+        // Method will return single customer 
+        
+        public Customer GetCustomer (int id) => _customer.SingleOrDefault(cust => cust.id == id);   
 
     }
 }
