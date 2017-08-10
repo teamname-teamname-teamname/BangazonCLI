@@ -23,9 +23,9 @@ namespace Bangazon
                         insert into customer values(null, 'Lil', 'Pump', '2 Main St.', 'Miami', 'FL', '23456', '555-555-5551');
                         insert into customer values(null, 'Smoke', 'Purpp', '3 Main St.', 'Miami', 'FL', '34567', '555-555-5552');
 
-                        insert into paymentType values(null, 12, 'Cash', 1);
-                        insert into paymentType values(null, 13, 'Visa', 2);
-                        insert into paymentType values(null, 14, 'MasterCard', 3);
+                        insert into paymentType values(null, 'Cash', 1, 12);
+                        insert into paymentType values(null, Visa, 2, 13);
+                        insert into paymentType values(null, 'MasterCard', 3, 13);
 
                         insert into [order] values (null, 1, 1);
                         insert into [order] values(null, 2, 2);
