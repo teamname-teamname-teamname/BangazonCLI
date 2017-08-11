@@ -35,19 +35,10 @@ namespace Bangazon.Actions
             {
                 int orderId;
 
-                Order activeOrder = om.GetSingleOrder(CustomerManager.activeCustomer);
-                List<Order> orders= om.GetOrders();
-
-            
-                foreach (Order order in orders)
+                int activeOrder = om.CheckActiveOrder();
+                if (activeOrder != 0)
                 {
-                    if (order.CustomerId == CustomerManager.activeCustomer && order.PaymentTypeId == null){
-                        orderId = order.Id;
-                    }
-                }
-                if (activeOrder.PaymentTypeId == null)
-                {
-                    orderId = activeOrder.Id;
+                    orderId = activeOrder;
                 }
                 else
                 {

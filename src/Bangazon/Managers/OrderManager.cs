@@ -85,5 +85,19 @@ namespace Bangazon.Managers
             int prodOrdId = _db.Insert($"INSERT INTO productOrder VALUES (null, {prodId}, {orderId})");
             return prodOrdId;
         }
+
+        public int CheckActiveOrder()
+        {
+            List<Order> orders= GetOrders();
+            
+                foreach (Order order in orders)
+                {
+                    if (order.CustomerId == CustomerManager.activeCustomer && order.PaymentTypeId == null)
+                    {
+                        return order.Id;
+                    }
+                }
+            return 0;
+        }
     }
 }
