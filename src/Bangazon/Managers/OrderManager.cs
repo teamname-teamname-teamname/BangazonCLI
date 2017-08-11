@@ -64,6 +64,11 @@ namespace Bangazon.Managers
         }
 
         /*
+            Return a single order
+        */
+        public Order GetSingleOrder (int id) => _order.SingleOrDefault(ord => ord.CustomerId == id);
+
+        /*
             Add a payment to the null field "payment" in an order, return true once complete
         */
         public bool AddPaymentTypeToOrder(int payTypeId, int orderId)
