@@ -54,6 +54,7 @@ namespace Bangazon.Managers
         */
         public List<Product> GetProductList()
         {
+            _products.Clear(); // Clears Product List and repopulate with all products from the db
             _db.Query("SELECT Id, CustomerId, Name, Description, Quantity, Price FROM product",
             (SqliteDataReader reader) =>{
                 while(reader.Read())

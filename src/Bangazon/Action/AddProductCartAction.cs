@@ -16,20 +16,29 @@ namespace Bangazon.Actions
                  Assigns the product to the productOrder table
         Author:  Dilshod
         */
-        public static void DoAction(OrderManager om, ProductManager pm, int custId)
+        public static void DoAction(OrderManager om, ProductManager pm, CustomerManager cm)
         {
             // Get list of Products
             var products = pm.GetProductList();
-            var counter = 1;
-            Console.Clear();
-            Console.WriteLine ("Choose a product to add to your cart");
-            foreach (var product in products)
-                {
-                    Console.WriteLine($"{counter++}. {product.Name}");
+            int counter;
+            int chooseProduct;
+            int orderId = om.CreateOrder(CustomerManager.activeCustomer);
+            do{
+                Console.Clear();
+                counter = 1;
+                Console.WriteLine ("Choose a product to add to your cart");
+                foreach (var product in products)
+                    {
+                        Console.WriteLine($"{counter++}. {product.Name}");
+                    }
+                Console.WriteLine($"Press {counter} to quit");
+                Console.Write ("> ");
+                chooseProduct = int.Parse(Console.ReadLine());
+                if (chooseProduct < counter){
+                    om.AddProductToOrder(chooseProduct, orderId);
                 }
-            Console.WriteLine($"Press {counter} to quit");
-            Console.Write ("> ");
-            int chooseCustomer = int.Parse(Console.ReadLine());
+            }
+            while (chooseProduct < counter);
         }
     }
 }
