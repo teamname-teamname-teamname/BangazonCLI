@@ -28,12 +28,8 @@ namespace Bangazon
             PaymentTypeManager ptm = new PaymentTypeManager(dab);
             ProductManager pm = new ProductManager(dab);
 
-            // ActiveCustomer
-            int ActiveCustomer = 0;
-
 			// Read in the user's choice
 			int choice;
-			// Int32.TryParse (Console.ReadLine(), out choice);
 
             // If option 1 was chosen, create a new customer account
             do
@@ -63,7 +59,7 @@ namespace Bangazon
                         break;
                     // Menu option 5: Add product to shopping cart
                     case 5:
-                        AddProductCart.DoAction(om, pm, ActiveCustomer);
+                        AddProductCart.DoAction(om, pm, cm);
                         break;
                     // Menu option 6: Complete an order
                     case 6:

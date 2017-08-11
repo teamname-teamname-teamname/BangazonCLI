@@ -26,15 +26,15 @@ namespace Bangazon.Managers
         /* 
             This method will create a new order 
         */
-        public int CreateOrder (Customer customer)
+        public int CreateOrder (int custId)
         {
-            int id = _db.Insert( $"INSERT INTO [order] VALUES (null, {customer.id}, null)");
+            int id = _db.Insert( $"INSERT INTO [order] VALUES (null, {custId}, null)");
             _order.Add(
                 new Order()
                 {
                     Id = id,
                     PaymentTypeId = null,
-                    CustomerId = customer.id
+                    CustomerId = CustomerManager.activeCustomer
                 }
             );
             return id;
@@ -62,6 +62,11 @@ namespace Bangazon.Managers
             );
             return _order;
         }
+
+        /*
+            Return a single order
+        */
+        public Order GetSingleOrder (int id) => _order.SingleOrDefault(ord => ord.CustomerId == id);
 
         /*
             Add a payment to the null field "payment" in an order, return true once complete

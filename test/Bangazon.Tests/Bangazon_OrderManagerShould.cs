@@ -27,7 +27,7 @@ namespace Bangazon.Tests
         public void CreateNewOrderShould()
         {
             Customer customer = new Customer();
-            int id = _om.CreateOrder(customer);
+            int id = _om.CreateOrder(customer.id);
             Assert.IsType<int>(id);
         }
 
