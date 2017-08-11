@@ -39,8 +39,13 @@ namespace Bangazon.Actions
             int id = int.Parse(Console.ReadLine());
             
             //jk-This will go through the list of customers pulled back and grab the number that was selected minus 1 to grab the index for customer id
-            chooseID = customers[id - 1].id;
-            Console.WriteLine(chooseID + "ID HERE");
+            chooseID = id - 1;
+            Console.WriteLine($"You chose: {customers[chooseID].firstName} {customers[chooseID].lastName}");
+            Console.WriteLine("* Press 'ENTER' to return to the main menu *");
+            Console.ReadLine();
+            
+            //jk-This will set the active customer to the id chosen
+            CustomerManager.activeCustomer = id;
             return chooseID;
         }
     }
