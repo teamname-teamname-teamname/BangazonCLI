@@ -27,10 +27,18 @@ namespace Bangazon.Actions
         Console.Write ("> ");
         string city = Console.ReadLine();
         Console.Clear();
+
+
+
+        try {
         Console.WriteLine ("Enter customer state abbreviation");
         Console.Write ("> ");
         string state = Console.ReadLine();
         Console.Clear();
+
+
+
+
         Console.WriteLine ("Enter customer postal code");
         Console.Write ("> ");
         string zipCode = Console.ReadLine();
