@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Bangazon.Managers;
+using Bangazon.Models;
 
 namespace Bangazon.Actions
 {
@@ -16,20 +17,51 @@ namespace Bangazon.Actions
                  Assigns the product to the productOrder table
         Author:  Dilshod
         */
-        public static void DoAction(OrderManager om, ProductManager pm, int custId)
+        public static void DoAction(OrderManager om, ProductManager pm, CustomerManager cm)
         {
             // Get list of Products
             var products = pm.GetProductList();
-            var counter = 1;
-            Console.Clear();
-            Console.WriteLine ("Choose a product to add to your cart");
-            foreach (var product in products)
+            int counter;
+            int chooseProduct;
+            // Checks if there's an active customer. If not, kicks them to the main menu
+            if (CustomerManager.activeCustomer == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("* Please choose an active customer before continuing *");
+                Console.WriteLine("* Press 'ENTER' to return to the main menu *");
+                Console.ReadLine();
+            }
+            else
+            {
+                int orderId;
+
+                int activeOrder = om.CheckActiveOrder();
+                if (activeOrder != 0)
                 {
-                    Console.WriteLine($"{counter++}. {product.Name}");
+                    orderId = activeOrder;
                 }
-            Console.WriteLine($"Press {counter} to quit");
-            Console.Write ("> ");
-            int chooseCustomer = int.Parse(Console.ReadLine());
+                else
+                {
+                    orderId = om.CreateOrder(CustomerManager.activeCustomer);
+                }
+                
+                do{
+                    Console.Clear();
+                    counter = 1;
+                    Console.WriteLine ("Choose a product to add to your cart");
+                    foreach (var product in products)
+                        {
+                            Console.WriteLine($"{counter++}. {product.Name}");
+                        }
+                    Console.WriteLine($"Press {counter} to quit");
+                    Console.Write ("> ");
+                    chooseProduct = int.Parse(Console.ReadLine());
+                    if (chooseProduct < counter){
+                        om.AddProductToOrder(chooseProduct, orderId);
+                    }
+                }
+                while (chooseProduct < counter);
+            }
         }
     }
 }

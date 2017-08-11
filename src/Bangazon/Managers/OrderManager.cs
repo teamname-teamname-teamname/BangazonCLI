@@ -26,15 +26,15 @@ namespace Bangazon.Managers
         /* 
             This method will create a new order 
         */
-        public int CreateOrder (Customer customer)
+        public int CreateOrder (int custId)
         {
-            int id = _db.Insert( $"INSERT INTO [order] VALUES (null, {customer.id}, null)");
+            int id = _db.Insert( $"INSERT INTO [order] VALUES (null, {custId}, null)");
             _order.Add(
                 new Order()
                 {
                     Id = id,
                     PaymentTypeId = null,
-                    CustomerId = customer.id
+                    CustomerId = CustomerManager.activeCustomer
                 }
             );
             return id;
@@ -64,6 +64,11 @@ namespace Bangazon.Managers
         }
 
         /*
+            Return a single order
+        */
+        public Order GetSingleOrder (int id) => _order.SingleOrDefault(ord => ord.CustomerId == id);
+
+        /*
             Add a payment to the null field "payment" in an order, return true once complete
         */
         public bool AddPaymentTypeToOrder(int payTypeId, int orderId)
@@ -79,6 +84,24 @@ namespace Bangazon.Managers
         {
             int prodOrdId = _db.Insert($"INSERT INTO productOrder VALUES (null, {prodId}, {orderId})");
             return prodOrdId;
+        }
+
+        /*  
+            Author: Ollie
+            Calls GetOrders and stores each order in a list. Then searches that list for an existing order for the active customer. If there is one AND the PaymentTypeId is null (meaning the order is incomplete). It returns that order id. Else it returns 0.
+        */
+        public int CheckActiveOrder()
+        {
+            List<Order> orders= GetOrders();
+            
+                foreach (Order order in orders)
+                {
+                    if (order.CustomerId == CustomerManager.activeCustomer && order.PaymentTypeId == null)
+                    {
+                        return order.Id;
+                    }
+                }
+            return 0;
         }
     }
 }
