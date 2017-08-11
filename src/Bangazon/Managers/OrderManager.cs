@@ -86,6 +86,10 @@ namespace Bangazon.Managers
             return prodOrdId;
         }
 
+        /*  
+            Author: Ollie
+            Calls GetOrders and stores each order in a list. Then searches that list for an existing order for the active customer. If there is one AND the PaymentTypeId is null (meaning the order is incomplete). It returns that order id. Else it returns 0.
+        */
         public int CheckActiveOrder()
         {
             List<Order> orders= GetOrders();
