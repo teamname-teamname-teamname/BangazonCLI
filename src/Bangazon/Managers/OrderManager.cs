@@ -85,5 +85,23 @@ namespace Bangazon.Managers
             int prodOrdId = _db.Insert($"INSERT INTO productOrder VALUES (null, {prodId}, {orderId})");
             return prodOrdId;
         }
+
+        /*  
+            Author: Ollie
+            Calls GetOrders and stores each order in a list. Then searches that list for an existing order for the active customer. If there is one AND the PaymentTypeId is null (meaning the order is incomplete). It returns that order id. Else it returns 0.
+        */
+        public int CheckActiveOrder()
+        {
+            List<Order> orders= GetOrders();
+            
+                foreach (Order order in orders)
+                {
+                    if (order.CustomerId == CustomerManager.activeCustomer && order.PaymentTypeId == null)
+                    {
+                        return order.Id;
+                    }
+                }
+            return 0;
+        }
     }
 }
