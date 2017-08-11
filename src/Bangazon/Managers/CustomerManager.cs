@@ -53,6 +53,7 @@ namespace Bangazon.Managers
         // Method will return list of all customers in database
         public List<Customer> GetCustomerList()
         {
+            _customer.Clear();
             _db.Query("select id, firstName, lastName, address, city, state, zipCode, phoneNumber from customer",
             (SqliteDataReader reader) =>{
                 while(reader.Read())
