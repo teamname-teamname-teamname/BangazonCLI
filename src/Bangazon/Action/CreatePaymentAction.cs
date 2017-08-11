@@ -30,7 +30,7 @@ namespace Bangazon.Actions
                     Console.Clear();
                     Console.WriteLine("Enter account number");
                     Console.Write(">");
-                    int accountNumber = Convert.ToInt32(Console.ReadLine());
+                    string accountNumber = Console.ReadLine();
             
                 // Builds/Sends a new payment type, where it gets added to the PaymentManager
                 int payType = payment.AddPayment(new PaymentType()

@@ -336,7 +336,7 @@ namespace Bangazon
                             `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `name` varchar(80) not null, 
                             `customerId` integer not null,
-                            `accountNumber` integer not null,
+                            `accountNumber` varchar(20) not null,
                             FOREIGN KEY(`customerId`) REFERENCES `customer`(`id`)
                         )";
                         try
