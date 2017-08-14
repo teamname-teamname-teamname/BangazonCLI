@@ -29,10 +29,31 @@ namespace Bangazon.Actions
                 Console.Write ("> ");
                 string name = Console.ReadLine();
                 Console.Clear();
+                
+                //jk-Wrapped Product Price in a do while to loop through the statement unless certain condition is met, if price is not a valid input, catch the error and make user re-enter a valid price
+                bool priceIsADouble = true;
+                double price = 0;
+                
+                do{
                 Console.WriteLine("Enter product price");
                 Console.Write ("> ");
-                double price = double.Parse(Console.ReadLine());
-                Console.Clear();
+                string line = Console.ReadLine();
+                //Console.WriteLine(line);
+                    try
+                    {
+                        price = double.Parse(line);
+                        priceIsADouble = true;
+                    }
+                    catch(FormatException)
+                    {
+                            Console.WriteLine("{0} is not a valid price", line);
+                            Console.WriteLine("*Press 'ENTER' and re-enter a valid price*");
+                            Console.ReadLine();
+                            priceIsADouble = false;
+                    }
+                }while(priceIsADouble == false);
+
+                //Console.Clear();
                 Console.WriteLine("Enter product description");
                 Console.Write ("> ");
                 string description = Console.ReadLine();
