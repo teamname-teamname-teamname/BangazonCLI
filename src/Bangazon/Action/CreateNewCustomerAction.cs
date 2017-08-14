@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using Bangazon.Managers;
 using Bangazon.Models;
 
-
 namespace Bangazon.Actions
 {
+  /*
+  Class: CreateCustomer
+  Purpose: Command Line Interaction to build a new customer and add it to the database
+  Author: Steve
+  */
   public class CreateCustomer
   {
     public static void DoAction(CustomerManager registr)

@@ -6,14 +6,13 @@ using Microsoft.Data.Sqlite;
 
 namespace Bangazon.Managers
 {
+    /*
+    Class: OrderManager
+    Purpose: This class is used to write implementation code for tests in the Bangazon_OrderManagerShould.cs file.
+    Author: Dilshod
+    */
     public class OrderManager
     {
-        /*
-            Class: OrderManager
-            Purpose: This class is used to write implementation code for 
-                    tests in the Bangazon_OrderManagerShould.cs file.
-            Author: Dilshod
-        */
         private List<Order> _order = new List<Order>();
         private DatabaseInterface _db;
         
@@ -23,9 +22,7 @@ namespace Bangazon.Managers
             _order = new List<Order>();
         }
 
-        /* 
-            This method will create a new order 
-        */
+        // This method will create a new order 
         public int CreateOrder (int custId)
         {
             int id = _db.Insert( $"INSERT INTO [order] VALUES (null, {custId}, null)");
@@ -40,9 +37,7 @@ namespace Bangazon.Managers
             return id;
         }
 
-        /*
-            Return a List of All Orders
-         */
+        // Return a List of All Orders
         public List<Order> GetOrders()
         {
             _db.Query($"SELECT id, customerId, paymentTypeId FROM [order]", 
@@ -63,23 +58,19 @@ namespace Bangazon.Managers
             return _order;
         }
 
-        /*
-            Return a single order
-        */
+
+        // Return a single order
         public Order GetSingleOrder (int id) => _order.SingleOrDefault(ord => ord.CustomerId == id);
 
-        /*
-            Add a payment to the null field "payment" in an order, return true once complete
-        */
+        // Add a payment to the null field "payment" in an order, return true once complete
         public bool AddPaymentTypeToOrder(int payTypeId, int orderId)
         {
             _db.Update($"UPDATE [order] SET PaymentTypeId = {payTypeId} WHERE [order].Id = {orderId}");
             return true;
         }
 
-        /*  
-            Add a product by productId to an order by orderId return the index of the item added to the productorder join table
-        */
+
+        // Add a product by productId to an order by orderId return the index of the item added to the productorder join table
         public int AddProductToOrder(int prodId, int orderId)
         {
             int prodOrdId = _db.Insert($"INSERT INTO productOrder VALUES (null, {prodId}, {orderId})");
